@@ -6,3 +6,4 @@ authors = ["Clement Miao <clementmiao@gmail.com>"]
 [dependencies]
 iron = "*"
 router = "*"
+handlebars-iron = "*"

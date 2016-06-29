@@ -1,9 +1,11 @@
 extern crate iron;
 extern crate router;
+extern crate handlebars_iron as hbs;
 
 use iron::prelude::*;
 use iron::status;
 use router::Router;
+use hbs::{Template, HandlebarsEngine, DirectorySource, MemorySource};
 
 fn main() {
     let mut router = Router::new();
