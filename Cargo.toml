@@ -4,6 +4,4 @@ version = "0.1.0"
 authors = ["Clement Miao <clementmiao@gmail.com>"]
 
 [dependencies]
-iron = "*"
-router = "*"
-handlebars-iron = "*"
+nickel = "*"

@@ -1,26 +1,18 @@
-extern crate iron;
-extern crate router;
-extern crate handlebars_iron as hbs;
+#[macro_use] extern crate nickel;
 
-use iron::prelude::*;
-use iron::status;
-use router::Router;
-use hbs::{Template, HandlebarsEngine, DirectorySource, MemorySource};
+use std::collections::HashMap;
+use nickel::{Nickel, HttpRouter,StaticFilesHandler};
 
 fn main() {
-    let mut router = Router::new();
+    let mut server = Nickel::new();
 
-    router.get("/",hello_world);
+    server.get("/", middleware! { |_, response|
+        let mut data = HashMap::new();
+        data.insert("text", "Coming Soon");
+        return response.render("assets/template.tpl", &data);
+    });
 
-    router.get("/about", about_page);
+    server.utilize(StaticFilesHandler::new("assets/css/"));
 
-    fn about_page(_: &mut Request) -> IronResult<Response> {
-        Ok(Response::with((status::Ok, "This will be about me")))
-    }
-
-    fn hello_world(_: &mut Request) -> IronResult<Response> {
-        Ok(Response::with((status::Ok, "Hello World!")))
-    }
-
-    Iron::new(router).http("localhost:8080").unwrap();
+    server.listen("127.0.0.1:6767");
 }
