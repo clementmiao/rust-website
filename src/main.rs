@@ -14,5 +14,5 @@ fn main() {
 
     server.utilize(StaticFilesHandler::new("assets/css/"));
 
-    server.listen("127.0.0.1:6767");
+    server.listen("127.0.0.1:8080");
 }
